@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <RootNamespace>Huisart_Eto.Wpf</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Huisart-Eto\Huisart-Eto.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Eto.Platform.Wpf" Version="2.8.3"/>
+    </ItemGroup>
+
+</Project>

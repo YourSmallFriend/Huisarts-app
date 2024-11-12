@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Huisart-Eto", "Huisart-Eto\Huisart-Eto\Huisart-Eto.csproj", "{B75A15AB-20DB-46CC-9DCB-A01BDC342F1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Huisart-Eto.Gtk", "Huisart-Eto\Huisart-Eto.Gtk\Huisart-Eto.Gtk.csproj", "{DCD62967-1052-42BE-8CCC-CC1B9D75B48B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Huisart-Eto.Mac", "Huisart-Eto\Huisart-Eto.Mac\Huisart-Eto.Mac.csproj", "{F40FC374-8C5A-438E-8BC7-FCFF5DA09B65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Huisart-Eto.Wpf", "Huisart-Eto\Huisart-Eto.Wpf\Huisart-Eto.Wpf.csproj", "{7BAA16EE-1D32-452A-8E79-B1CC5830FDEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B75A15AB-20DB-46CC-9DCB-A01BDC342F1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B75A15AB-20DB-46CC-9DCB-A01BDC342F1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B75A15AB-20DB-46CC-9DCB-A01BDC342F1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B75A15AB-20DB-46CC-9DCB-A01BDC342F1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCD62967-1052-42BE-8CCC-CC1B9D75B48B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCD62967-1052-42BE-8CCC-CC1B9D75B48B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCD62967-1052-42BE-8CCC-CC1B9D75B48B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCD62967-1052-42BE-8CCC-CC1B9D75B48B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F40FC374-8C5A-438E-8BC7-FCFF5DA09B65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F40FC374-8C5A-438E-8BC7-FCFF5DA09B65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F40FC374-8C5A-438E-8BC7-FCFF5DA09B65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F40FC374-8C5A-438E-8BC7-FCFF5DA09B65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BAA16EE-1D32-452A-8E79-B1CC5830FDEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BAA16EE-1D32-452A-8E79-B1CC5830FDEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BAA16EE-1D32-452A-8E79-B1CC5830FDEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BAA16EE-1D32-452A-8E79-B1CC5830FDEF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
