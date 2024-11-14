@@ -14,6 +14,7 @@
 
     <ItemGroup>
         <PackageReference Include="Eto.Platform.Mac64" Version="2.8.3"/>
+        <PackageReference Include="MySQL.Data.Entities" Version="6.8.3" />
     </ItemGroup>
 
 </Project>

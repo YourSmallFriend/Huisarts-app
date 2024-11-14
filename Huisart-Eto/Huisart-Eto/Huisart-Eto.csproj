@@ -1,12 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
         <RootNamespace>Huisart_Eto</RootNamespace>
+        <LangVersion>12</LangVersion>
+        <TargetFramework>net8.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Eto.Forms" Version="2.8.3"/>
+        <PackageReference Include="MySQL.Data.Entities" Version="6.8.3" />
     </ItemGroup>
 
 </Project>

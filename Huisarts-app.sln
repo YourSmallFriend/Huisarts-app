@@ -8,8 +8,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Huisart-Eto.Mac", "Huisart-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Huisart-Eto.Wpf", "Huisart-Eto\Huisart-Eto.Wpf\Huisart-Eto.Wpf.csproj", "{7BAA16EE-1D32-452A-8E79-B1CC5830FDEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB-Library", "DB-Library\DB-Library.csproj", "{2BEEE049-28C7-4D57-BB46-13DF5ABA403A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,9 +30,5 @@ Global
 		{7BAA16EE-1D32-452A-8E79-B1CC5830FDEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BAA16EE-1D32-452A-8E79-B1CC5830FDEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BAA16EE-1D32-452A-8E79-B1CC5830FDEF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2BEEE049-28C7-4D57-BB46-13DF5ABA403A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2BEEE049-28C7-4D57-BB46-13DF5ABA403A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2BEEE049-28C7-4D57-BB46-13DF5ABA403A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2BEEE049-28C7-4D57-BB46-13DF5ABA403A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

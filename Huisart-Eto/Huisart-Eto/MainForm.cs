@@ -1,58 +1,93 @@
-using System;
 using Eto.Forms;
-using Eto.Drawing;
 
 namespace Huisart_Eto
 {
-    public partial class MainForm : Form
+    public class MainForm : Form
     {
+        private TextBox _gebruikersnaamTextBox;
+        private PasswordBox _wachtwoordTextBox;
+
         public MainForm()
         {
             Title = "My Eto Form";
-            MinimumSize = new Size(200, 200);
+            Maximize();
 
-            Content = new StackLayout
+            var inloggen = new Command { MenuText = "Inloggen", ToolBarText = "Inloggen" };
+
+            inloggen.Executed += (sender, e) =>
             {
-                Padding = 10,
-                Items =
+                if (_gebruikersnaamTextBox.Text == "admin" && _wachtwoordTextBox.Text == "admin")
                 {
-                    "Hello World!",
-                    // add more controls here
+                    // Open de ApplicatieForm als de inloggegevens correct zijn
+                    var volgendScherm = new ApplicatieForm();
+                    volgendScherm.Show();
+                }
+                else
+                {
+                    MessageBox.Show(this, "Ongeldige gebruikersnaam of wachtwoord.", MessageBoxButtons.OK, MessageBoxType.Error);
                 }
             };
 
-            // create a few commands that can be used for the menu and toolbar
-            var clickMe = new Command { MenuText = "Click Me!", ToolBarText = "Click Me!" };
-            clickMe.Executed += (sender, e) => MessageBox.Show(this, "I was clicked!");
+            _gebruikersnaamTextBox = new TextBox();
+            _wachtwoordTextBox = new PasswordBox();
 
-            var quitCommand = new Command
-                { MenuText = "Quit", Shortcut = Application.Instance.CommonModifier | Keys.Q };
+            Content = new StackLayout
+            {
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                VerticalContentAlignment = VerticalAlignment.Center,
+                Items =
+                {
+                    new Label { Text = "Gebruikersnaam" },
+                    _gebruikersnaamTextBox,
+                    new Label { Text = "Wachtwoord" },
+                    _wachtwoordTextBox,
+                    new Button { Text = "Inloggen", Command = inloggen },
+                }
+            };
+            
+            var quitCommand = new Command { MenuText = "Quit", Shortcut = Application.Instance.CommonModifier | Keys.Q };
             quitCommand.Executed += (sender, e) => Application.Instance.Quit();
 
             var aboutCommand = new Command { MenuText = "About..." };
             aboutCommand.Executed += (sender, e) => new AboutDialog().ShowDialog(this);
 
-            // create menu
             Menu = new MenuBar
             {
-                Items =
-                {
-                    // File submenu
-                    new SubMenuItem { Text = "&File", Items = { clickMe } },
-                    // new SubMenuItem { Text = "&Edit", Items = { /* commands/items */ } },
-                    // new SubMenuItem { Text = "&View", Items = { /* commands/items */ } },
-                },
                 ApplicationItems =
                 {
-                    // application (OS X) or file menu (others)
                     new ButtonMenuItem { Text = "&Preferences..." },
                 },
                 QuitItem = quitCommand,
                 AboutItem = aboutCommand
             };
-
-            // create toolbar			
-            ToolBar = new ToolBar { Items = { clickMe } };
+            
+            //dit veroorzaakt een error in de mac versie waardoor de app niet opstart
+            
+            // ToolBar = new ToolBar { Items = { clickMe } };
+            //
+            // var formLayout = new StackLayout
+            // {
+            //     HorizontalContentAlignment = HorizontalAlignment.Center,
+            //     Items =
+            //     {
+            //         new Label { Text = "Gebruikersnaam" },
+            //         gebruikersnaamTextBox,
+            //         new Label { Text = "Wachtwoord" },
+            //         wachtwoordTextBox,
+            //         new Button { Text = "Inloggen", Command = inloggen }
+            //     }
+            // };
+            //
+            // // Plaats de StackLayout in het midden van een TableLayout
+            // Content = new TableLayout
+            // {
+            //     Rows =
+            //     {
+            //         new TableRow(null),  // Lege rij boven
+            //         new TableRow(new TableCell(formLayout, true)),  // Centraal uitgelijnde StackLayout
+            //         new TableRow(null)   // Lege rij onder
+            //     }
+            // };
         }
     }
 }
