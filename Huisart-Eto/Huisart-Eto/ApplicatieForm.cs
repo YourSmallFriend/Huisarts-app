@@ -24,7 +24,7 @@ namespace Huisart_Eto
             allPatienten = patientenService.GetPatienten().ToList();
 
             // Maak een GridView
-            gridView = new GridView();
+            gridView = new GridView() { AllowMultipleSelection = false };
             UpdateGridView();
 
             // Zoekbalk
@@ -152,6 +152,14 @@ namespace Huisart_Eto
                 HeaderText = "Place",
                 DataCell = new TextBoxCell { Binding = Binding.Property<Patienten, string>(p => p.place) }
             });
+            
+            //als er op de rij wordt geklikt dan opent er een nieuwe form met de gegevens van de patient
+            gridView.CellDoubleClick += (sender, e) =>
+            {
+                var selectedPatient = (Patienten) gridView.SelectedItem;
+                var patientForm = new PatientForm(selectedPatient);
+                patientForm.Show();
+            };
         }
     }
 }
