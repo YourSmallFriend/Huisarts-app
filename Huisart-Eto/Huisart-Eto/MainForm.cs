@@ -34,7 +34,9 @@ namespace Huisart_Eto
             Content = new StackLayout
             {
                 HorizontalContentAlignment = HorizontalAlignment.Center,
-                VerticalContentAlignment = VerticalAlignment.Center,
+                
+                //dit werkt gewoon niet
+                // VerticalContentAlignment = VerticalAlignment.Center,
                 Items =
                 {
                     new Label { Text = "Gebruikersnaam" },
@@ -60,34 +62,6 @@ namespace Huisart_Eto
                 QuitItem = quitCommand,
                 AboutItem = aboutCommand
             };
-            
-            //dit veroorzaakt een error in de mac versie waardoor de app niet opstart
-            
-            // ToolBar = new ToolBar { Items = { clickMe } };
-            //
-            // var formLayout = new StackLayout
-            // {
-            //     HorizontalContentAlignment = HorizontalAlignment.Center,
-            //     Items =
-            //     {
-            //         new Label { Text = "Gebruikersnaam" },
-            //         gebruikersnaamTextBox,
-            //         new Label { Text = "Wachtwoord" },
-            //         wachtwoordTextBox,
-            //         new Button { Text = "Inloggen", Command = inloggen }
-            //     }
-            // };
-            //
-            // // Plaats de StackLayout in het midden van een TableLayout
-            // Content = new TableLayout
-            // {
-            //     Rows =
-            //     {
-            //         new TableRow(null),  // Lege rij boven
-            //         new TableRow(new TableCell(formLayout, true)),  // Centraal uitgelijnde StackLayout
-            //         new TableRow(null)   // Lege rij onder
-            //     }
-            // };
         }
     }
 }
