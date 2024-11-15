@@ -16,7 +16,7 @@ public class PatientenService
         {
             connection.Open();
             var command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM patienten";
+            command.CommandText = "SELECT * FROM person";
             var reader = command.ExecuteReader();
 
             while (reader.Read())
@@ -43,7 +43,7 @@ public class PatientenService
         {
             connection.Close();
         }
-
+        
         return patienten;
     }
 }
