@@ -1,3 +1,5 @@
+using System.Linq;
+using Eto.Drawing;
 using Eto.Forms;
 
 namespace Huisart_Eto
@@ -8,6 +10,7 @@ namespace Huisart_Eto
         {
             Title = "Applicatie";
             Maximize();
+            BackgroundColor = Color.FromArgb(50 , 50 , 50);
 
             // Retrieve the list of patients from the service
             var patientenService = new PatientenService();
@@ -62,13 +65,23 @@ namespace Huisart_Eto
                 DataCell = new TextBoxCell { Binding = Binding.Property<Patienten, string>(p => p.place) }
             });
 
+            //maak een zoek balk voor de patienten haal de patienten met een linq query op en zet ze in de gridview
+            var search = new TextBox();
+            search.TextChanged += (sender, e) =>
+            {
+                var searchResult = patienten.Where(p => p.first_name.ToLower().Contains(search.Text) || p.last_name.ToLower().Contains(search.Text) || p.email.Contains(search.Text) || p.phone.Contains(search.Text) || p.postcode.Contains(search.Text) || p.adress.Contains(search.Text) || p.place.Contains(search.Text)).ToList();
+                gridView.DataStore = searchResult;
+            };
+            
             Content = new StackLayout
             {
                 Items =
                 {
+                    search,
                     gridView
                 }
             };
+            
         }
     }
 }

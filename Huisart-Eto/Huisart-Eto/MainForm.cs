@@ -1,3 +1,4 @@
+using Eto.Drawing;
 using Eto.Forms;
 
 namespace Huisart_Eto
@@ -11,6 +12,7 @@ namespace Huisart_Eto
         {
             Title = "My Eto Form";
             Maximize();
+            BackgroundColor = Color.FromArgb(50 , 50 , 50);
 
             var inloggen = new Command { MenuText = "Inloggen", ToolBarText = "Inloggen" };
 
@@ -34,19 +36,16 @@ namespace Huisart_Eto
             Content = new StackLayout
             {
                 HorizontalContentAlignment = HorizontalAlignment.Center,
-                
-                //dit werkt gewoon niet
-                // VerticalContentAlignment = VerticalAlignment.Center,
                 Items =
                 {
-                    new Label { Text = "Gebruikersnaam" },
+                    new Label { Text = "Gebruikersnaam", TextColor = Colors.White },
                     _gebruikersnaamTextBox,
-                    new Label { Text = "Wachtwoord" },
+                    new Label { Text = "Wachtwoord", TextColor = Colors.White },
                     _wachtwoordTextBox,
                     new Button { Text = "Inloggen", Command = inloggen },
                 }
             };
-            
+
             var quitCommand = new Command { MenuText = "Quit", Shortcut = Application.Instance.CommonModifier | Keys.Q };
             quitCommand.Executed += (sender, e) => Application.Instance.Quit();
 

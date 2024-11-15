@@ -16,7 +16,7 @@ public class Patienten
     public string last_name { get; set; }
     public string email { get; set; }
     public string phone { get; set; }
-    public string? postcode { get; set; }
+    public string postcode { get; set; }
     public string adress { get; set; }
     public string place { get; set; }
 }
