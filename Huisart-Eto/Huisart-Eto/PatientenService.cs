@@ -30,7 +30,8 @@ public class PatientenService
                     phone = reader.GetString("phone"),
                     postcode = reader.GetString("postcode"),
                     adress = reader.GetString("adress"),
-                    place = reader.GetString("place")
+                    place = reader.GetString("place"),
+                    notitie = reader.GetString("notitie")
                 });
             }
         }

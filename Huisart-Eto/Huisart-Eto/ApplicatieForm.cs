@@ -12,6 +12,7 @@ namespace Huisart_Eto
         private int currentPage = 0;
         private List<Patienten> allPatienten;
         private GridView gridView;
+        private Button openPatientFormButton;
 
         public ApplicatieForm()
         {
@@ -25,6 +26,7 @@ namespace Huisart_Eto
 
             // Maak een GridView
             gridView = new GridView() { AllowMultipleSelection = false };
+            gridView.SelectionChanged += GridView_SelectionChanged;
             UpdateGridView();
 
             // Zoekbalk
@@ -33,19 +35,19 @@ namespace Huisart_Eto
             {
                 var searchText = search.Text.ToLower();
                 var searchResult = allPatienten
-                    .Where(p => p.first_name.ToLower().Contains(searchText) || 
+                    .Where(p => p.first_name.ToLower().Contains(searchText) ||
                                 p.last_name.ToLower().Contains(searchText) ||
-                                p.email.Contains(searchText) || 
-                                p.phone.Contains(searchText) || 
-                                p.postcode.Contains(searchText) || 
-                                p.adress.Contains(searchText) || 
+                                p.email.Contains(searchText) ||
+                                p.phone.Contains(searchText) ||
+                                p.postcode.Contains(searchText) ||
+                                p.adress.Contains(searchText) ||
                                 p.place.Contains(searchText))
                     .ToList();
                 allPatienten = searchResult;
                 currentPage = 0;
                 UpdateGridView();
             };
-            
+
             //als de zoekbalk leeg is dan worden alle patienten getoond
             search.TextChanged += (sender, e) =>
             {
@@ -78,6 +80,15 @@ namespace Huisart_Eto
                 }
             };
 
+            // Button to open PatientForm
+            openPatientFormButton = new Button { Text = "Open Patient Form", Visible = false };
+            openPatientFormButton.Click += (sender, e) =>
+            {
+                var patient = (Patienten)gridView.SelectedItem;
+                var patientForm = new PatientForm(patient);
+                patientForm.Show();
+            };
+
             // Layout
             Content = new StackLayout
             {
@@ -86,6 +97,7 @@ namespace Huisart_Eto
                 {
                     search,
                     gridView,
+                    openPatientFormButton,
                     new StackLayout
                     {
                         HorizontalContentAlignment = HorizontalAlignment.Center,
@@ -99,6 +111,11 @@ namespace Huisart_Eto
                     }
                 }
             };
+        }
+
+        private void GridView_SelectionChanged(object sender, EventArgs e)
+        {
+            openPatientFormButton.Visible = gridView.SelectedItem != null;
         }
 
         private void UpdateGridView()
@@ -152,14 +169,24 @@ namespace Huisart_Eto
                 HeaderText = "Place",
                 DataCell = new TextBoxCell { Binding = Binding.Property<Patienten, string>(p => p.place) }
             });
-            
-            //als er op de rij wordt geklikt dan opent er een nieuwe form met de gegevens van de patient
-            gridView.CellDoubleClick += (sender, e) =>
+            var quitCommand = new Command { MenuText = "Quit", Shortcut = Application.Instance.CommonModifier | Keys.Q };
+            quitCommand.Executed += (sender, e) => Application.Instance.Quit();
+            Menu = new MenuBar
             {
-                var selectedPatient = (Patienten) gridView.SelectedItem;
-                var patientForm = new PatientForm(selectedPatient);
-                patientForm.Show();
+                ApplicationItems =
+                {
+                    new ButtonMenuItem { Text = "&Preferences..." },
+                },
+                QuitItem = quitCommand,
             };
+        }
+        
+        public void RefreshData()
+        {
+            var patientenService = new PatientenService();
+            var allPatienten = patientenService.GetPatienten().ToList();
+            currentPage = 0;
+            UpdateGridView();
         }
     }
 }

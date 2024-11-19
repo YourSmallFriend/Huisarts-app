@@ -19,4 +19,5 @@ public class Patienten
     public string postcode { get; set; }
     public string adress { get; set; }
     public string place { get; set; }
+    public string notitie { get; set; }
 }
