@@ -81,7 +81,7 @@ namespace Huisart_Eto
             };
 
             // Button to open PatientForm
-            openPatientFormButton = new Button { Text = "Open Patient Form", Visible = false };
+            openPatientFormButton = new Button { Text = "info patient", Visible = false };
             openPatientFormButton.Click += (sender, e) =>
             {
                 var patient = (Patienten)gridView.SelectedItem;
@@ -97,7 +97,6 @@ namespace Huisart_Eto
                 {
                     search,
                     gridView,
-                    openPatientFormButton,
                     new StackLayout
                     {
                         HorizontalContentAlignment = HorizontalAlignment.Center,
@@ -106,7 +105,8 @@ namespace Huisart_Eto
                         Items =
                         {
                             previousButton,
-                            nextButton
+                            nextButton,
+                            openPatientFormButton,
                         }
                     }
                 }
