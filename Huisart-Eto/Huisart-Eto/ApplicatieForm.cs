@@ -22,7 +22,7 @@ namespace Huisart_Eto
 
             // Haal patiënten op
             var patientenService = new PatientenService();
-            allPatienten = patientenService.GetPatienten().ToList();
+            allPatienten = patientenService.GetPatienten().Where(p => !p.isDeleted).ToList();
 
             // Maak een GridView
             gridView = new GridView() { AllowMultipleSelection = false };
@@ -53,7 +53,7 @@ namespace Huisart_Eto
             {
                 if (string.IsNullOrWhiteSpace(search.Text))
                 {
-                    allPatienten = patientenService.GetPatienten().ToList();
+                    allPatienten = patientenService.GetPatienten().Where(p => !p.isDeleted).ToList();
                     currentPage = 0;
                     UpdateGridView();
                 }
@@ -88,6 +88,14 @@ namespace Huisart_Eto
                 var patientForm = new PatientForm(patient);
                 patientForm.Show();
             };
+            
+            // Button to open DeletedPatientForm
+            var openDeletedPatientFormButton = new Button { Text = "Verwijderde patienten" };
+            openDeletedPatientFormButton.Click += (sender, e) =>
+            {
+                var deletedPatientForm = new DeletedPatientForm();
+                deletedPatientForm.Show();
+            };
 
             // Layout
             Content = new StackLayout
@@ -106,6 +114,7 @@ namespace Huisart_Eto
                         {
                             previousButton,
                             nextButton,
+                            openDeletedPatientFormButton,
                             openPatientFormButton,
                         }
                     }
@@ -180,11 +189,10 @@ namespace Huisart_Eto
                 QuitItem = quitCommand,
             };
         }
-        
+
         public void RefreshData()
         {
-            var patientenService = new PatientenService();
-            var allPatienten = patientenService.GetPatienten().ToList();
+            allPatienten = new PatientenService().GetPatienten().Where(p => !p.isDeleted).ToList();
             currentPage = 0;
             UpdateGridView();
         }

@@ -44,8 +44,37 @@ public class PatientForm : Form
                 command.Parameters.AddWithValue("@patient_id", selectedPatient.patient_id);
                 command.ExecuteNonQuery();
                 connection.Close();
+                
+                //  voeg de notitie ook toe aan de patient in de lijst
+                selectedPatient.notitie = notitieLabel.Text;
+                
                 MessageBox.Show("Notitie opgeslagen");
-
+                
+                // Refresh the data in ApplicatieForm
+                var applicatieForm = Application.Instance.MainForm as ApplicatieForm;
+                applicatieForm?.RefreshData();
+            })
+        };
+        
+        
+        
+        //verwijder de patient in form van een soft delete
+        var deleteButton = new Button
+        {
+            Text = "Delete",
+            Command = new Command((sender, e) =>
+            {
+                var connectString = "Server=localhost;Database=Huisarts;Uid=root;Pwd=;";
+                var connection = new MySqlConnection(connectString);
+                connection.Open();
+                var command = connection.CreateCommand();
+                command.CommandText = "UPDATE person SET isDeleted = 1 WHERE patient_id = @patient_id";
+                command.Parameters.AddWithValue("@patient_id", selectedPatient.patient_id);
+                command.ExecuteNonQuery();
+                connection.Close();
+                
+                MessageBox.Show("Patient verwijderd");
+                
                 // Refresh the data in ApplicatieForm
                 var applicatieForm = Application.Instance.MainForm as ApplicatieForm;
                 applicatieForm?.RefreshData();
@@ -59,6 +88,7 @@ public class PatientForm : Form
                 naamLabel,
                 notitieLabel,
                 saveButton,
+                deleteButton
             }
         };
 

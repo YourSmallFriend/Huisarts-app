@@ -31,7 +31,8 @@ public class PatientenService
                     postcode = reader.GetString("postcode"),
                     adress = reader.GetString("adress"),
                     place = reader.GetString("place"),
-                    notitie = reader.GetString("notitie")
+                    notitie = reader.GetString("notitie"),
+                    isDeleted = reader.GetBoolean("isDeleted")
                 });
             }
         }

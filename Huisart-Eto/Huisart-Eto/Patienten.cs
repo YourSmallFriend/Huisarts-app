@@ -2,13 +2,6 @@ namespace Huisart_Eto;
 using MySql.Data.MySqlClient;
 public class Patienten
 {
-    //open de connectie met de database
-    public MySqlConnection Connect()
-    {
-        var connectString = "Server=localhost;Database=Huisarts;Uid=root;Pwd=;";
-        var connection = new MySqlConnection(connectString);
-        return connection;
-    }
     
     //hier sla ik de gegevens van de patienten op in een lijst patient_id first_name last_name email phone postcode adress place
     public int patient_id { get; set; }
@@ -20,4 +13,5 @@ public class Patienten
     public string adress { get; set; }
     public string place { get; set; }
     public string notitie { get; set; }
+    public bool isDeleted { get; set; }
 }
