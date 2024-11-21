@@ -75,10 +75,6 @@ public class PatientForm : Form
                     command.Parameters.AddWithValue("@patient_id", selectedPatient.patient_id);
                     command.ExecuteNonQuery();
 
-                    command.CommandText = "INSERT INTO deleted_patients (patient_id, deleted_at) VALUES (@patient_id, @deleted_at)";
-                    command.Parameters.AddWithValue("@deleted_at", DateTime.Now);
-                    command.ExecuteNonQuery();
-
                     connection.Close();
 
                     MessageBox.Show("Patient verwijderd");
