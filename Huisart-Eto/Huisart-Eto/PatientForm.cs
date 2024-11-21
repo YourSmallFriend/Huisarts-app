@@ -61,7 +61,7 @@ public class PatientForm : Form
         //verwijder de patient in form van een soft delete
         var deleteButton = new Button
         {
-            Text = "Delete",
+            Text = "Delete patient",
             Command = new Command((sender, e) =>
             {
                 var connectString = "Server=localhost;Database=Huisarts;Uid=root;Pwd=;";

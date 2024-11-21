@@ -96,6 +96,14 @@ namespace Huisart_Eto
                 var deletedPatientForm = new DeletedPatientForm();
                 deletedPatientForm.Show();
             };
+            
+            // Button to open AddPatientForm
+            var addPatientButton = new Button { Text = "Voeg patient toe" };
+            addPatientButton.Click += (sender, e) =>
+            {
+                var addPatientForm = new AddPatientenForm();
+                addPatientForm.Show();
+            };
 
             // Layout
             Content = new StackLayout
@@ -115,7 +123,8 @@ namespace Huisart_Eto
                             previousButton,
                             nextButton,
                             openDeletedPatientFormButton,
-                            openPatientFormButton,
+                            addPatientButton,
+                            openPatientFormButton
                         }
                     }
                 }

@@ -31,7 +31,7 @@ namespace Huisart_Eto
             //knop om de patienten te herstellen
             var restoreButton = new Button
             {
-                Text = "Herstel",
+                Text = "Herstel patient",
                 Command = new Command((sender, e) =>
                 {
                     var selectedPatient = gridView.SelectedItem as Patienten;

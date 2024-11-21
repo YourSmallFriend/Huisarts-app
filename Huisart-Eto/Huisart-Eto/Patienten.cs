@@ -1,5 +1,4 @@
 namespace Huisart_Eto;
-using MySql.Data.MySqlClient;
 public class Patienten
 {
     
