@@ -1,3 +1,4 @@
+using System;
 using Eto.Drawing;
 using Eto.Forms;
 using MySql.Data.MySqlClient;
@@ -64,20 +65,35 @@ public class PatientForm : Form
             Text = "Delete patient",
             Command = new Command((sender, e) =>
             {
-                var connectString = "Server=localhost;Database=Huisarts;Uid=root;Pwd=;";
-                var connection = new MySqlConnection(connectString);
-                connection.Open();
-                var command = connection.CreateCommand();
-                command.CommandText = "UPDATE person SET isDeleted = 1 WHERE patient_id = @patient_id";
-                command.Parameters.AddWithValue("@patient_id", selectedPatient.patient_id);
-                command.ExecuteNonQuery();
-                connection.Close();
+                try
+                {
+                    var connectString = "Server=localhost;Database=Huisarts;Uid=root;Pwd=;";
+                    var connection = new MySqlConnection(connectString);
+                    connection.Open();
+                    var command = connection.CreateCommand();
+                    command.CommandText = "UPDATE person SET isDeleted = 1 WHERE patient_id = @patient_id";
+                    command.Parameters.AddWithValue("@patient_id", selectedPatient.patient_id);
+                    command.ExecuteNonQuery();
+                    
+                    // //sla de datum op waarop de patient is op isDeleted gezet
+                    // command.CommandText = "UPDATE person SET deleted_at = @deleted_at WHERE patient_id = @patient_id";
+                    // command.Parameters.AddWithValue("@deleted_at", DateTime.Now);
+                    // command.ExecuteNonQuery();
+                    
+                    connection.Close();
                 
-                MessageBox.Show("Patient verwijderd");
-                
-                // Refresh the data in ApplicatieForm
-                var applicatieForm = Application.Instance.MainForm as ApplicatieForm;
-                applicatieForm?.RefreshData();
+                    MessageBox.Show("Patient verwijderd");
+                    
+                    // Refresh the data in ApplicatieForm
+                    var applicatieForm = Application.Instance.MainForm as ApplicatieForm;
+                    applicatieForm?.RefreshData();
+
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception);
+                    throw;
+                }
             })
         };
 

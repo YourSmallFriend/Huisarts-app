@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Eto.Drawing;
 using Eto.Forms;
@@ -15,6 +16,31 @@ namespace Huisart_Eto
             BackgroundColor = Color.FromArgb(50, 50, 50);
             Maximize();
 
+            //haal de data op uit de database waar de patienten in de table DeletedPatients staan
+            var patientenService = new PatientenService();
+            var patienten = patientenService.GetPatienten();
+            var deletedPatienten = patienten.FindAll(p => p.isDeleted);
+
+            //haal nu de datetime op van de deleted_at en zet deze in de deletedPatienten
+            var connectString = "Server=localhost;Database=Huisarts;Uid=root;Pwd=;";
+            var connection = new MySqlConnection(connectString);
+            connection.Open();
+            var command = connection.CreateCommand();
+            command.CommandText = "SELECT patient_id, deleted_at FROM deleted_patients WHERE isDeleted = 1";
+            var reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                var patientId = reader.GetInt32("patient_id");
+                var deletedAt = reader.GetDateTime("deleted_at").ToString();
+
+                var patient = deletedPatienten.Find(p => p.patient_id == patientId);
+                if (patient != null)
+                {
+                    patient.deleted_at = deletedAt;
+                }
+            }
+            connection.Close();
+
             //datagridview waar de patienten in komen te staan die op isDeleted = 1 staan
             gridView = new GridView() { AllowMultipleSelection = false };
             gridView.Columns.Add(new GridColumn
@@ -26,6 +52,11 @@ namespace Huisart_Eto
             {
                 HeaderText = "Achternaam",
                 DataCell = new TextBoxCell { Binding = Binding.Property<Patienten, string>(r => r.last_name) }
+            });
+            gridView.Columns.Add(new GridColumn
+            {
+                HeaderText = "Deleted At",
+                DataCell = new TextBoxCell { Binding = Binding.Property<Patienten, string>(r => r.deleted_at) }
             });
 
             //knop om de patienten te herstellen
