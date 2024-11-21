@@ -26,7 +26,7 @@ namespace Huisart_Eto
             var connection = new MySqlConnection(connectString);
             connection.Open();
             var command = connection.CreateCommand();
-            command.CommandText = "SELECT patient_id, deleted_at FROM deleted_patients WHERE isDeleted = 1";
+            command.CommandText = "SELECT patient_id, deleted_at FROM deleted_patients";
             var reader = command.ExecuteReader();
             while (reader.Read())
             {
@@ -78,6 +78,10 @@ namespace Huisart_Eto
                     command.CommandText = "UPDATE person SET isDeleted = 0 WHERE patient_id = @patient_id";
                     command.Parameters.AddWithValue("@patient_id", selectedPatient.patient_id);
                     command.ExecuteNonQuery();
+
+                    command.CommandText = "DELETE FROM deleted_patients WHERE patient_id = @patient_id";
+                    command.ExecuteNonQuery();
+
                     connection.Close();
 
                     //refresh de data in de applicatieform

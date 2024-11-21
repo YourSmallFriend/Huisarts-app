@@ -74,20 +74,18 @@ public class PatientForm : Form
                     command.CommandText = "UPDATE person SET isDeleted = 1 WHERE patient_id = @patient_id";
                     command.Parameters.AddWithValue("@patient_id", selectedPatient.patient_id);
                     command.ExecuteNonQuery();
-                    
-                    // //sla de datum op waarop de patient is op isDeleted gezet
-                    // command.CommandText = "UPDATE person SET deleted_at = @deleted_at WHERE patient_id = @patient_id";
-                    // command.Parameters.AddWithValue("@deleted_at", DateTime.Now);
-                    // command.ExecuteNonQuery();
-                    
+
+                    command.CommandText = "INSERT INTO deleted_patients (patient_id, deleted_at) VALUES (@patient_id, @deleted_at)";
+                    command.Parameters.AddWithValue("@deleted_at", DateTime.Now);
+                    command.ExecuteNonQuery();
+
                     connection.Close();
-                
+
                     MessageBox.Show("Patient verwijderd");
-                    
+
                     // Refresh the data in ApplicatieForm
                     var applicatieForm = Application.Instance.MainForm as ApplicatieForm;
                     applicatieForm?.RefreshData();
-
                 }
                 catch (Exception exception)
                 {
@@ -96,7 +94,6 @@ public class PatientForm : Form
                 }
             })
         };
-
         Content = new StackLayout
         {
             Items =
